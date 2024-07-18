@@ -41,16 +41,72 @@ class NaverMapScreen extends StatelessWidget {
     final Completer<NaverMapController> mapControllerCompleter = Completer();
 
     return Scaffold(
-      body: NaverMap(
-        options: const NaverMapViewOptions(
-          indoorEnable: true,             // 실내 맵 사용 가능 여부 설정
-          locationButtonEnable: false,    // 위치 버튼 표시 여부 설정
-          consumeSymbolTapEvents: false,  // 심볼 탭 이벤트 소비 여부 설정
-        ),
-        onMapReady: (controller) async {                // 지도 준비 완료 시 호출되는 콜백 함수
-          mapControllerCompleter.complete(controller);  // Completer에 지도 컨트롤러 완료 신호 전송
-          log("onMapReady", name: "onMapReady");
-        },
+      body: Stack(
+        children: [
+          NaverMap(
+            options: const NaverMapViewOptions(
+              indoorEnable: true,             // 실내 맵 사용 가능 여부 설정
+              locationButtonEnable: false,    // 위치 버튼 표시 여부 설정
+              consumeSymbolTapEvents: false,  // 심볼 탭 이벤트 소비 여부 설정
+            ),
+            onMapReady: (controller) async {                // 지도 준비 완료 시 호출되는 콜백 함수
+              mapControllerCompleter.complete(controller);  // Completer에 지도 컨트롤러 완료 신호 전송
+              log("onMapReady", name: "onMapReady");
+            },
+          ),
+          Positioned(
+            top: 35,
+            left: 10,
+            right: 10,
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 10,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    'assets/images/menu.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                ),
+                const SizedBox(width: 10), // 이미지와 텍스트 필드 사이의 간격
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        hintText: '정류장 검색',
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
