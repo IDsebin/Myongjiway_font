@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'search_screen.dart';  // 새로운 화면을 import
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,24 +82,33 @@ class NaverMapScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10), // 이미지와 텍스트 필드 사이의 간격
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: const Offset(0, 2),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SearchScreen()),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const TextField(
+                        decoration: InputDecoration(
+                          hintText: '정류장 검색',
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(color: Colors.grey),
                         ),
-                      ],
-                    ),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: '정류장 검색',
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(color: Colors.grey),
+                        enabled: false, // TextField를 읽기 전용으로 설정
                       ),
                     ),
                   ),
