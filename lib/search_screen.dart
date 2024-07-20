@@ -98,21 +98,36 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
           Positioned(
-            top: 100,
+            top: 110,
             left: 10,
             right: 10,
             child: Column(
-              children: _searchHistory.map((term) {
-                return ListTile(
-                  title: Text(term),
-                  trailing: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      _removeSearchTerm(term);
-                    },
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '최근 검색어',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                );
-              }).toList(),
+                ),
+                const Divider(
+                  color: Colors.black,
+                ),
+                Column(
+                  children: _searchHistory.map((term) {
+                    return ListTile(
+                      title: Text(term),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          _removeSearchTerm(term);
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
             ),
           ),
         ],
