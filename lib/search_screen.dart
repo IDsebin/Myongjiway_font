@@ -59,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      'assets/images/back.png',
+                      'assets/images/back.png',  //텍스트 추가(이건 시후한테 의견 물어보기)
                       width: 24,
                       height: 24,
                     ),
